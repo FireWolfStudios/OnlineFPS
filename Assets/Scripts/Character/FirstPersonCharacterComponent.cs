@@ -37,6 +37,8 @@ namespace OnlineFPS
         public float MaxViewAngle;
         public float ViewRollAmount;
         public float ViewRollSharpness;
+        public int MaxAirJumps;
+        public float SprintSpeedMultiplier;
 
         [HideInInspector] [GhostField(Quantization = 1000, Smoothing = SmoothingAction.InterpolateAndExtrapolate)]
         public float CharacterYDegrees;
@@ -47,7 +49,9 @@ namespace OnlineFPS
         [HideInInspector] public quaternion ViewLocalRotation;
         [HideInInspector] public float ViewRollDegrees;
         [HideInInspector] public byte HasProcessedDeath;
-
+        [HideInInspector] public int CurrentAirJumps;
+        [HideInInspector] public bool SprintHeld;
+        
         public static FirstPersonCharacterComponent GetDefault()
         {
             return new FirstPersonCharacterComponent
@@ -66,6 +70,7 @@ namespace OnlineFPS
 
                 MinViewAngle = -90f,
                 MaxViewAngle = 90f,
+
             };
         }
     }
@@ -80,6 +85,7 @@ namespace OnlineFPS
         public float3 MoveVector;
         public float2 LookYawPitchDegreesDelta;
         public bool Jump;
+        public bool Sprint;
     }
 
     [Serializable]

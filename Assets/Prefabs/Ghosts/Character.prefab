@@ -120,6 +120,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
@@ -255,17 +258,19 @@ MonoBehaviour:
       HasMaxDownwardSlopeChangeAngle: 0
       MaxDownwardSlopeChangeAngle: 90
       ConstrainVelocityToGroundPlane: 1
-    DeathVFXSize: 2
-    DeathVFXLifetime: 1
-    DeathVFXSpeed: 1
+    DeathVFXSize: 3.4
+    DeathVFXLifetime: 0.4
+    DeathVFXSpeed: 16
     DeathVFXColor:
       x: 0
-      y: 140.01012
-      z: 337.79395
+      y: 428.90063
+      z: 1024
     MinViewAngle: -90
     MaxViewAngle: 90
     ViewRollAmount: 8
     ViewRollSharpness: 10
+    MaxAirJumps: 1
+    SprintSpeedMultiplier: 2
     CharacterYDegrees: 0
     ViewPitchDegrees: 0
     ViewLocalRotation:
@@ -276,6 +281,8 @@ MonoBehaviour:
         w: 0
     ViewRollDegrees: 0
     HasProcessedDeath: 0
+    CurrentAirJumps: 0
+    SprintHeld: 0
 --- !u!114 &-528493553485514836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,6 +330,8 @@ MonoBehaviour:
   TrackInterpolationDelay: 0
   GhostGroup: 0
   UsePreSerialization: 0
+  RollbackPredictedSpawnedGhostState: 0
+  RollbackPredictionOnStructuralChanges: 1
 --- !u!136 &8494599271149049586
 CapsuleCollider:
   m_ObjectHideFlags: 0

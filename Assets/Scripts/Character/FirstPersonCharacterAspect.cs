@@ -96,9 +96,19 @@ namespace OnlineFPS
             {
                 // Move on ground
                 float3 targetVelocity = characterControl.MoveVector * characterComponent.GroundMaxSpeed;
+                
+                // Sprint
+                if (characterControl.Sprint)
+                {
+                    targetVelocity *= characterComponent.SprintSpeedMultiplier;
+                }
+                
                 CharacterControlUtilities.StandardGroundMove_Interpolated(ref characterBody.RelativeVelocity,
                     targetVelocity, characterComponent.GroundedMovementSharpness, deltaTime, characterBody.GroundingUp,
                     characterBody.GroundHit.Normal);
+
+                // Reset air jumps when grounded
+                characterComponent.CurrentAirJumps = 0;
 
                 // Jump
                 if (characterControl.Jump)
@@ -124,6 +134,13 @@ namespace OnlineFPS
                     {
                         characterBody.RelativeVelocity = tmpVelocity;
                     }
+                }
+
+                // Air Jumps
+                if (characterControl.Jump && characterComponent.CurrentAirJumps < characterComponent.MaxAirJumps)
+                {
+                    CharacterControlUtilities.StandardJump(ref characterBody, characterBody.GroundingUp * characterComponent.JumpSpeed, true, characterBody.GroundingUp);
+                    characterComponent.CurrentAirJumps++;
                 }
 
                 // Gravity

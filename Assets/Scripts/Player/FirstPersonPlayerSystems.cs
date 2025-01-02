@@ -94,6 +94,9 @@ namespace OnlineFPS
 
                 // Aim
                 playerCommands.ValueRW.AimHeld = defaultActionsMap.Aim.IsPressed();
+            
+                // Sprint
+                playerCommands.ValueRW.SprintHeld = defaultActionsMap.Sprint.IsPressed();
             }
         }
     }
@@ -228,6 +231,9 @@ namespace OnlineFPS
 
                     // Jump
                     characterControl.Jump = playerCommands.JumpPressed.IsSet;
+
+                    // Sprint
+                    characterControl.Sprint = playerCommands.SprintHeld;
 
                     CharacterControlLookup[player.ControlledCharacter] = characterControl;
                 }

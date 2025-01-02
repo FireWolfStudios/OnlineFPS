@@ -34,5 +34,6 @@ namespace OnlineFPS
         public InputEvent ShootPressed;
         public InputEvent ShootReleased;
         public bool AimHeld;
+        public bool SprintHeld;
     }
 }

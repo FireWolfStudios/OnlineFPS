@@ -67,7 +67,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Value"",
                     ""id"": ""73c5ed6d-6e83-4693-857f-7a639b926770"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -76,7 +76,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""fe797924-662a-430c-adec-0ad8e35f90c1"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -85,7 +85,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Aim"",
                     ""type"": ""Value"",
                     ""id"": ""025599b3-e820-4333-99db-6432435a6567"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -94,7 +94,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""ToggleMenu"",
                     ""type"": ""Button"",
                     ""id"": ""c67ae77d-ac15-40e3-8f93-54aae16763f7"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -107,6 +107,15 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sprint"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c1ef9ba-38d8-47b0-8a2e-43ab966b410a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -234,7 +243,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""df640d72-e032-4852-808d-495f215c9c9d"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -256,7 +265,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""39dce1d2-a182-4885-a5ac-fa83a5b86f7b"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -362,6 +371,28 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SpectatorVertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a387246-6610-4770-b26d-0b3bbff6c446"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f76f6da6-2f71-42dd-9eb3-d3387ec1e6f2"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sprint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -956,6 +987,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
         m_DefaultMap_Aim = m_DefaultMap.FindAction("Aim", throwIfNotFound: true);
         m_DefaultMap_ToggleMenu = m_DefaultMap.FindAction("ToggleMenu", throwIfNotFound: true);
         m_DefaultMap_SpectatorVertical = m_DefaultMap.FindAction("SpectatorVertical", throwIfNotFound: true);
+        m_DefaultMap_Sprint = m_DefaultMap.FindAction("Sprint", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1044,6 +1076,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_DefaultMap_Aim;
     private readonly InputAction m_DefaultMap_ToggleMenu;
     private readonly InputAction m_DefaultMap_SpectatorVertical;
+    private readonly InputAction m_DefaultMap_Sprint;
     public struct DefaultMapActions
     {
         private @FPSInputActions m_Wrapper;
@@ -1057,6 +1090,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
         public InputAction @Aim => m_Wrapper.m_DefaultMap_Aim;
         public InputAction @ToggleMenu => m_Wrapper.m_DefaultMap_ToggleMenu;
         public InputAction @SpectatorVertical => m_Wrapper.m_DefaultMap_SpectatorVertical;
+        public InputAction @Sprint => m_Wrapper.m_DefaultMap_Sprint;
         public InputActionMap Get() { return m_Wrapper.m_DefaultMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1093,6 +1127,9 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
             @SpectatorVertical.started += instance.OnSpectatorVertical;
             @SpectatorVertical.performed += instance.OnSpectatorVertical;
             @SpectatorVertical.canceled += instance.OnSpectatorVertical;
+            @Sprint.started += instance.OnSprint;
+            @Sprint.performed += instance.OnSprint;
+            @Sprint.canceled += instance.OnSprint;
         }
 
         private void UnregisterCallbacks(IDefaultMapActions instance)
@@ -1124,6 +1161,9 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
             @SpectatorVertical.started -= instance.OnSpectatorVertical;
             @SpectatorVertical.performed -= instance.OnSpectatorVertical;
             @SpectatorVertical.canceled -= instance.OnSpectatorVertical;
+            @Sprint.started -= instance.OnSprint;
+            @Sprint.performed -= instance.OnSprint;
+            @Sprint.canceled -= instance.OnSprint;
         }
 
         public void RemoveCallbacks(IDefaultMapActions instance)
@@ -1315,6 +1355,7 @@ public partial class @FPSInputActions: IInputActionCollection2, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnToggleMenu(InputAction.CallbackContext context);
         void OnSpectatorVertical(InputAction.CallbackContext context);
+        void OnSprint(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
